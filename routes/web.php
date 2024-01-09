@@ -96,3 +96,27 @@ Route::get('/admin/patente/cargarGrilla', 'ControladorPatente@cargarGrilla')->na
 Route::get('/admin/patente/eliminar', 'ControladorPatente@eliminar');
 Route::get('/admin/patente/nuevo/{id}', 'ControladorPatente@editar');
 Route::post('/admin/patente/nuevo/{id}', 'ControladorPatente@guardar');
+
+/* --------------------------------------------- */
+/* CONTROLADOR CLIENTES                          */
+/* --------------------------------------------- */
+Route::get('/admin/clientes', 'ControladorCliente@index');
+Route::get('/admin/cliente/nuevo', 'ControladorCliente@nuevo');
+
+/* --------------------------------------------- */
+/* CONTROLADOR PRODUCTOS                          */
+/* --------------------------------------------- */
+Route::get('/admin/productos', 'ControladorProducto@index');
+Route::get('/admin/producto/nuevo', 'ControladorProducto@nuevo');
+
+/* --------------------------------------------- */
+/* CONTROLADOR POSTULACIONES                          */
+/* --------------------------------------------- */
+Route::get('/admin/postulaciones', 'ControladorPostulacion@index');
+Route::get('/admin/postulacion/nuevo', 'ControladorPostulacion@nuevo');
+
+/* --------------------------------------------- */
+/* CONTROLADOR SUCURSALES                          */
+/* --------------------------------------------- */
+Route::get('/admin/sucursales', 'ControladorSucursal@index');
+Route::get('/admin/sucursal/nuevo', 'ControladorSucursal@nuevo');
