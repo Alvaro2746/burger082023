@@ -46,6 +46,26 @@ if (isset($msg)) {
                     <label>Nombre: *</label>
                     <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
                 </div>
+                <div class="form-group col-lg-6">
+                    <label>Apellido: *</label>
+                    <input type="text" id="txtApellido" name="txtApellido" class="form-control"  required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>DNI: *</label>
+                    <input type="text" id="txtDNI" name="txtDNI" class="form-control"  required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Telefono: *</label>
+                    <input type="number" id="txtTelefono" name="txtTelefono" class="form-control"  required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Correo: *</label>
+                    <input type="email" id="txtCorreo" name="txtCorreo" class="form-control"  required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Clave: *</label>
+                    <input type="password" id="txtClave" name="txtClave" class="form-control"  required>
+                </div>
             
                     
             </div>
