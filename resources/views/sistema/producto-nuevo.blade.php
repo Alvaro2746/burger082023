@@ -54,8 +54,19 @@ if (isset($msg)) {
                     <label>Precio: *</label>
                     <input type="text" id="txtPrecio" name="txtPrecio" class="form-control"  required>
                 </div>
+                <div class="form-group col-lg-6">
+                    <label>Categoria: *</label>
+                    <input type="text" id="txtCategoria" name="txtCategoria" class="form-control"  required>
+                </div>
+                  
 
-                  <div class="form-group col-lg-6">
+
+                <div class="form-group col-lg-12">
+                    <label>Descripcion: *</label>
+                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control"  required>
+                </div>
+
+                <div class="form-group col-lg-6">
                         <div class="row">
                               <div class="form-group col-lg-12">
                                     <label>Imagen: *</label>
@@ -65,12 +76,6 @@ if (isset($msg)) {
                               </div>
                         </div>
                   </div>
-
-
-                <div class="form-group col-lg-12">
-                    <label>Descripcion: *</label>
-                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control"  required>
-                </div>
 
                 <script>
                   ClassicEditor
