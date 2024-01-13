@@ -4,26 +4,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 
-class ControladorCliente extends Controller
+class ControladorCategoria extends Controller
 {
       public function nuevo()
       {
-            $titulo = "Nuevo cliente";
-            return view('sistema.cliente-nuevo', compact('titulo'));
+            $titulo = "Nueva Categoria";
+            return view('sistema.categoria-nuevo', compact('titulo'));
       }
 
       public function index()
       {
-            $titulo = "Listado de Clientes";
-            return view('sistema.cliente-listar', compact('titulo'));
+            $titulo = "Listado de Categorias";
+            return view('sistema.categoria-listar', compact('titulo'));
 
       }
       public function guardar(Request $request)
       {
             try {
                   //Define la entidad servicio
-                  $titulo = "Modificar Cliente";
-                  $entidad = new Cliente();
+                  $titulo = "Modificar Categoria";
+                  $entidad = new Categoria();
                   $entidad->cargarDesdeRequest($request);
       
                   //validaciones
