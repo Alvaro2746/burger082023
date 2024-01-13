@@ -12,7 +12,7 @@
     <li class="breadcrumb-item active">Productos;</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/Producto/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/producto/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/admin/Productos");'><span>Recargar</span></a></li>
 </ol>
 @endsection
@@ -27,9 +27,11 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Padre</th>
-            <th>URL</th>
-            <th>Activo</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Categoria</th>
+            <th>Descripcion</th>
+            <th>Imagen</th>
         </tr>
     </thead>
 </table> 

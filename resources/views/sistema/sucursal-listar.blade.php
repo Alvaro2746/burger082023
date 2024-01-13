@@ -1,6 +1,6 @@
 @extends('plantilla')
 
-@section('titulo', "Listado de postulaciones")
+@section('titulo', "Listado de Sucursales")
 
 @section('scripts')
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
@@ -9,11 +9,11 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-    <li class="breadcrumb-item active">postulaciones;</a></li>
+    <li class="breadcrumb-item active">Sucursales;</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/postulacion/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/admin/postulaciones");'><span>Recargar</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/sucursal/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/admin/sucursales");'><span>Recargar</span></a></li>
 </ol>
 @endsection
 @section('contenido')
@@ -27,10 +27,7 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Whatsapp</th>
-            <th>Correo</th>
-            <th>CV</th>
+            
         </tr>
     </thead>
 </table> 
