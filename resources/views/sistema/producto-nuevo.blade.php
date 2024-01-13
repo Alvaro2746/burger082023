@@ -15,7 +15,7 @@
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/sistema/cliente/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/cliente/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     @if($globalId > 0)
@@ -88,5 +88,18 @@ if (isset($msg)) {
                     
             </div>
       </form>
+
+      <script>
+    function guardar() {
+            if ($("#form1").valid()) {
+                modificado = false;
+                form1.submit(); //validacion
+            } else {
+                $("#modalGuardar").modal('toggle');
+                msgShow("Corrija los errores e intente nuevamente.", "danger");
+                return false;
+            }
+        }
+</script>
                 
 @endsection
