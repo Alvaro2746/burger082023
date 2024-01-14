@@ -22,7 +22,7 @@ class Cliente extends Model
         $this->idcliente = $request->input('id') != "0" ? $request->input('id') : $this->idcliente;
         $this->nombre = $request->input('txtNombre');
         $this->apellido = $request->input('txtApellido');
-        $this->correo = $request->input('txtCorreo') != "" ? $request->input('txtOrden') : 0;
+        $this->correo = $request->input('txtCorreo');
         $this->telefono = $request->input('txtTelefono');
         $this->dni = $request->input('txtDni');
         $this->clave = $request->input('txtclave') != ""? password_hash(input('txtclave'), PASSWORD_DEFAULT): "";
