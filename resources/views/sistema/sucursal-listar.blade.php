@@ -27,6 +27,8 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
+            <th>Direccion</th>
+            <th>Estado</th>
             
         </tr>
     </thead>

@@ -46,6 +46,14 @@ if (isset($msg)) {
                     <label>Nombre: *</label>
                     <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
                 </div>
+                <div class="form-group col-lg-6">
+                    <label>Direccion: *</label>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Estado: *</label>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
+                </div>
             
                     
             </div>
