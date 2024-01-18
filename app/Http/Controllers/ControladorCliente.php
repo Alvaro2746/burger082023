@@ -29,6 +29,7 @@ class ControladorCliente extends Controller
       
                   //validaciones
                   if ($entidad->nombre == "") {
+                    
                       $msg["ESTADO"] = MSG_ERROR;
                       $msg["MSG"] = "Complete todos los datos";
 
@@ -39,6 +40,7 @@ class ControladorCliente extends Controller
                       return view('sistema.cliente-nuevo', compact('msg', 'cliente', 'titulo', 'array_cliente', 'array_cliente_grupo')) . '?id=' . $cliente->idcliente;
         
                   } else {
+                    
                       if ($_POST["id"] > 0) {
                           //Es actualizacion
                           $entidad->guardar();

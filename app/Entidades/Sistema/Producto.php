@@ -22,7 +22,8 @@ class Producto extends Model
         $this->idproducto = $request->input('id') != "0" ? $request->input('id') : $this->idproducto;
         $this->nombreproducto = $request->input('txtNombreProducto');
         $this->precio = $request->input('txtPrecio');
-        $this->fk_idtipoproducto = $request->input('txtFk_idtipoproducto');
+        $this->fk_idtipoproducto = $request->input('txtFk_idtipoproducto');      
+        $this->cantidad = $request->input('txtCantidad');
     }
 
     
@@ -57,6 +58,7 @@ class Producto extends Model
             $this->nombreproducto = $lstRetorno[0]->nombreproducto;
             $this->precio = $lstRetorno[0]->precio;
             $this->fk_idtipoproducto = $lstRetorno[0]->fk_idtipoproducto;
+            $this->cantidad = $lstRetorno[0]->cantidad;
             return $this;
         }
         return null;

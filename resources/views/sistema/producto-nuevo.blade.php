@@ -44,7 +44,7 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
+                    <input type="text" id="txtNombreProducto" name="txtNombreProducto" class="form-control"  required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Cantidad: *</label>
@@ -56,7 +56,13 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Categoria: *</label>
-                    <input type="text" id="txtCategoria" name="txtCategoria" class="form-control"  required>
+                    <select id="txtCategoria" name="txtCategoria" class="form-control"  required>
+                    <option  value="1" selected>Comida</option>
+
+                    
+
+
+                </select>
                 </div>
                   
 
