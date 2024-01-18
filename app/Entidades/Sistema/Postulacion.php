@@ -11,7 +11,7 @@ class Postulacion extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idpostulacion', 'nombre', 'apellido', 'email', 'domicilio', 'whatsapp', 'cv',
+        'idpostulacion', 'nombre', 'apellido', 'email', 'domicilio', 'whatsapp'
     ];
 
     protected $hidden = [
@@ -19,10 +19,10 @@ class Postulacion extends Model
     ];
 
     public function cargarDesdeRequest($request) {
-        $this->idpostulacion = $request->input('id') != "0" ? $request->input('id') : $this->idcliente;
+        $this->idpostulacion = $request->input('id') != "0" ? $request->input('id') : $this->idpostulacion;
         $this->nombre = $request->input('txtNombre');
         $this->apellido = $request->input('txtApellido');
-        $this->email = $request->input('txtEmail');
+        $this->email = $request->input('txtCorreo');
         $this->domicilio = $request->input('txtDomicilio');
         $this->whatsapp = $request->input('txtWhatsapp');
     }
@@ -105,7 +105,7 @@ class Postulacion extends Model
             $this->domicilio,
             $this->whatsapp,
         ]);
-        return $this->idcliente = DB::getPdo()->lastInsertId();
+        return $this->idpostulacion = DB::getPdo()->lastInsertId();
     }
 
 
