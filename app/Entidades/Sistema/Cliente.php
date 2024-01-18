@@ -24,7 +24,7 @@ class Cliente extends Model
         $this->apellido = $request->input('txtApellido');
         $this->correo = $request->input('txtCorreo');
         $this->telefono = $request->input('txtTelefono');
-        $this->dni = $request->input('txtDni');
+        $this->dni = $request->input('txtDNI');
         $this->clave = $request->input('txtclave') != ""? password_hash(input('txtclave'), PASSWORD_DEFAULT): "";
     }
 
