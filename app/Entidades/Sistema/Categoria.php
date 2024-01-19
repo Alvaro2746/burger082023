@@ -20,7 +20,7 @@ class Categoria extends Model
 
     public function cargarDesdeRequest($request) {
         $this->idtipoproducto = $request->input('id') != "0" ? $request->input('id') : $this->idtipoproducto;
-        $this->nombrecategoria = $request->input('txtNombrecategoria');
+        $this->nombrecategoria = $request->input('txtNombre');
         
     }
 
