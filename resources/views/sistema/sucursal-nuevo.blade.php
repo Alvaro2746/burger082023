@@ -53,7 +53,9 @@ if (isset($msg)) {
                 <div class="form-group col-lg-6">
                     <label>Estado: *</label>
                     <select id="txtEstado" name="txtEstado" class="form-control"  required>
-                    <option  value="1" selected>Pendiente (pagado)</option>
+                    <option  disabled value="" selected >Seleccionar</option>
+                    <option  value="1" >Cerrado</option>
+                    <option  value="2" >Abierto</option>
 
                 </select>
                     

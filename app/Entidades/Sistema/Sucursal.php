@@ -41,6 +41,9 @@ class Sucursal extends Model
     }
 
 
+
+
+
     public function obtenerPorId($idsucursal)
     {
         $sql = "SELECT
