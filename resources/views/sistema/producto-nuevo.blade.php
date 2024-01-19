@@ -59,9 +59,6 @@ if (isset($msg)) {
                     <select id="txtCategoria" name="txtCategoria" class="form-control"  required>
                     <option  value="1" selected>Comida</option>
 
-                    
-
-
                 </select>
                 </div>
                   

@@ -20,9 +20,9 @@ class Sucursal extends Model
 
     public function cargarDesdeRequest($request) {
         $this->idsucursal = $request->input('id') != "0" ? $request->input('id') : $this->idsucursal;
-        $this->nombresucursal = $request->input('txtNombresucursal');
-        $this->direccionsucursal = $request->input('direccionsucursal');
-        $this->estado_sucursal = $request->input('estado_sucursal');
+        $this->nombresucursal = $request->input('txtNombre');
+        $this->direccionsucursal = $request->input('txDireccion');
+        $this->estado_sucursal = $request->input('txtEstado');
         
     }
 

@@ -48,15 +48,29 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Direccion: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
+                    <input type="text" id="txDireccion" name="txDireccion" class="form-control"  required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Estado: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
-                </div>
-            
+                    <select id="txtEstado" name="txtEstado" class="form-control"  required>
+                    <option  value="1" selected>Pendiente (pagado)</option>
+
+                </select>
                     
             </div>
       </form>
+
+      <script>
+    function guardar() {
+            if ($("#form1").valid()) {
+                modificado = false;
+                form1.submit(); //validacion
+            } else {
+                $("#modalGuardar").modal('toggle');
+                msgShow("Corrija los errores e intente nuevamente.", "danger");
+                return false;
+            }
+        }
+</script>
                 
 @endsection
