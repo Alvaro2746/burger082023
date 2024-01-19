@@ -22,7 +22,7 @@ class Producto extends Model
         $this->idproducto = $request->input('id') != "0" ? $request->input('id') : $this->idproducto;
         $this->nombreproducto = $request->input('txtNombreProducto');
         $this->precio = $request->input('txtPrecio');
-        $this->fk_idtipoproducto = $request->input('txtFk_idtipoproducto');      
+        $this->fk_idtipoproducto = $request->input('txtCategoria');      
         $this->cantidad = $request->input('txtCantidad');
     }
 

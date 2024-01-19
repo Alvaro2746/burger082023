@@ -1,3 +1,9 @@
+<?php 
+//TEST
+print_r($array_menu);
+exit;
+?>
+
 @extends('plantilla')
 @section('titulo', "$titulo")
 @section('scripts')

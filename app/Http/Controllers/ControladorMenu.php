@@ -66,6 +66,10 @@ class ControladorMenu extends Controller
         $titulo = "Nuevo Menú";
         $menu = new Menu();
         $array_menu = $menu->obtenerMenuPadre();
+
+        // print_r($array_menu);
+        // exit;
+
         return view('sistema.menu-nuevo', compact('menu', 'titulo', 'array_menu'));
 
     }

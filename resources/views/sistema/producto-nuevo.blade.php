@@ -1,3 +1,12 @@
+
+<?php 
+//TEST
+
+// echo count($array_categoria);
+// exit;
+?>
+
+
 @extends('plantilla')
 
 @section('titulo', "$titulo")
@@ -54,12 +63,23 @@ if (isset($msg)) {
                     <label>Precio: *</label>
                     <input type="text" id="txtPrecio" name="txtPrecio" class="form-control"  required>
                 </div>
+                
+
                 <div class="form-group col-lg-6">
                     <label>Categoria: *</label>
                     <select id="txtCategoria" name="txtCategoria" class="form-control"  required>
-                    <option  value="1" selected>Comida</option>
+                    <option  value="" selected disable>Seleccionar</option>
 
-                </select>
+                    
+                    @for ($i = 0; $i < count($array_categoria); $i++)
+                            @if (isset($categoria) and $array_categoria[$i]->idtipoproducto == $categoria->idtipoproducto)
+                                <option selected value="{{ $array_categoria[$i]->idtipoproducto }}">{{ $array_categoria[$i]->nombrecategoria }}</option>
+                            @else
+                                <option value="{{ $array_categoria[$i]->idtipoproducto }}">{{ $array_categoria[$i]->nombrecategoria }}</option>
+                            @endif
+                        @endfor
+                        </select>
+
                 </div>
                   
 
@@ -69,7 +89,7 @@ if (isset($msg)) {
                     <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control"  required>
                 </div>
 
-                <div class="form-group col-lg-6">
+                <div class="form-group col-lg-12">
                         <div class="row">
                               <div class="form-group col-lg-12">
                                     <label>Imagen: *</label>

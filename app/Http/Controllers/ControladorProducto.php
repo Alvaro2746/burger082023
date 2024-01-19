@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Producto;
+use App\Entidades\Sistema\Categoria;
 require app_path().'/start/constants.php';
 
 class ControladorProducto extends Controller
@@ -10,7 +11,18 @@ class ControladorProducto extends Controller
       public function nuevo()
       {
             $titulo = "Nuevo Producto";
-            return view('sistema.producto-nuevo', compact('titulo'));
+
+            $categoria = new Categoria();
+            $array_categoria = $categoria->obtenerTodos();
+
+            //  print_r($array_categoria);
+            //  exit;
+            
+            return view('sistema.producto-nuevo', compact('titulo', 'categoria', 'array_categoria' ));
+
+
+    
+            
       }
       public function index()
       {

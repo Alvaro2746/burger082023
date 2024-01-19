@@ -31,7 +31,7 @@ class Categoria extends Model
         $sql = "SELECT
                   idtipoproducto,
                   nombrecategoria
-                FROM tipoproductos ORDER BY nombre";
+                FROM tipoproductos ORDER BY nombrecategoria";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
