@@ -130,3 +130,9 @@ Route::post('/admin/sucursal/nuevo', 'ControladorSucursal@guardar');
 Route::get('/admin/categorias', 'ControladorCategoria@index');
 Route::get('/admin/categoria/nuevo', 'ControladorCategoria@nuevo');
 Route::post('/admin/categoria/nuevo', 'ControladorCategoria@guardar');
+/* --------------------------------------------- */
+/* CONTROLADOR PEDIDOS                          */
+/* --------------------------------------------- */
+Route::get('/admin/pedidos', 'ControladorPedidosa@index');
+Route::get('/admin/categoria/nuevo', 'ControladorCategoria@nuevo');
+Route::post('/admin/categoria/nuevo', 'ControladorCategoria@guardar');
