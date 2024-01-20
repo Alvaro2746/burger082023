@@ -24,11 +24,43 @@ class Cliente extends Model
         $this->apellido = $request->input('txtApellido');
         $this->correo = $request->input('txtCorreo');
         $this->telefono = $request->input('txtTelefono');
-        $this->dni = $request->input('txtDNI    ');
+        $this->dni = $request->input('txtDNI');
         $this->clave = $request->input('txtclave') != ""? password_hash(input('txtclave'), PASSWORD_DEFAULT): "";
     }
 
-    
+    public function obtenerFiltrado()
+    {
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'C.nombre',
+            1 => 'C.apellido',
+            2 => 'C.dni',
+            3 => 'C.telefono',
+            4 => 'C.correo',
+        );
+        $sql = "SELECT 
+                    C.idcliente,
+                    C.nombre,
+                    C.apellido,
+                    C.dni,
+                    C.telefono,
+                    C.correo
+                    FROM clientes C
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( C.nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR C.apellido LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR C.dni LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR C.telefono LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
 
     public function obtenerTodos()
     {

@@ -66,6 +66,40 @@ class ControladorCliente extends Controller
       
       
           }
+
+          public function cargarGrilla()
+    {
+        $request = $_REQUEST;
+
+        $entidad = new Cliente();
+        $aCliente = $entidad->obtenerFiltrado();
+
+        $data = array();
+        $cont = 0;
+
+        $inicio = $request['start'];
+        $registros_por_pagina = $request['length'];
+
+
+        for ($i = $inicio; $i < count($aCliente) && $cont < $registros_por_pagina; $i++) {
+            $row = array();
+            $row[] = '<a href="/admin/sistema/cliente/' . $aCliente[$i]->idcliente . '">' . $aCliente[$i]->nombre . '</a>';
+            $row[] = $aCliente[$i]->apellido;
+            $row[] = $aCliente[$i]->dni;
+            $row[] = $aCliente[$i]->telefono;
+            $row[] = $aCliente[$i]->correo;
+            $cont++;
+            $data[] = $row;
+        }
+
+        $json_data = array(
+            "draw" => intval($request['draw']),
+            "recordsTotal" => count($aCliente), //cantidad total de registros sin paginar
+            "recordsFiltered" => count($aCliente), //cantidad total de registros en la paginacion
+            "data" => $data,
+        );
+        return json_encode($json_data);
+    }
       
       }
 

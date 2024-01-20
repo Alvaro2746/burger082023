@@ -34,7 +34,18 @@ if (isset($msg)) {
         </tr>
     </thead>
 </table> 
-
-
+ 
+<script>
+	var dataTable = $('#grilla').DataTable({
+	    "processing": true,
+        "serverSide": true,
+	    "bFilter": true,
+	    "bInfo": true,
+	    "bSearchable": true,
+        "pageLength": 25,
+        "order": [[ 0, "asc" ]],
+	    "ajax": "{{ route('cliente.cargarGrilla') }}"
+	});
+</script>
 
 @endsection
