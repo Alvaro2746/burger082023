@@ -29,12 +29,25 @@ if (isset($msg)) {
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Whatsapp</th>
+            <th>Domicilio</th>
             <th>Correo</th>
             <th>CV</th>
         </tr>
     </thead>
 </table> 
 
+<script>
+	var dataTable = $('#grilla').DataTable({
+	    "processing": true,
+        "serverSide": true,
+	    "bFilter": true,
+	    "bInfo": true,
+	    "bSearchable": true,
+        "pageLength": 25,
+        "order": [[ 0, "asc" ]],
+	    "ajax": "{{ route('postulacion.cargarGrilla') }}"
+	});
+</script>
 
 
 @endsection

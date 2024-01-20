@@ -108,5 +108,41 @@ class Postulacion extends Model
         return $this->idpostulacion = DB::getPdo()->lastInsertId();
     }
 
+    public function obtenerFiltrado()
+    {
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'P.nombre',
+            1 => 'P.apellido',
+            2 => 'P.whatsapp',
+            3 => 'P.domicilio',
+            4 => 'P.email',
+            5 => 'P.cv',
+        );
+        $sql = "SELECT 
+                    P.idpostulacion,
+                    P.nombre,
+                    P.apellido,
+                    P.whatsapp,
+                    P.domicilio,
+                    P.email,
+                    P.cv
+                    FROM postulaciones P
+                ";
 
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( P.nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.apellido LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.email LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.domicilio LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.whatsapp LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.cv LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
 }

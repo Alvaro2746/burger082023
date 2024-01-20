@@ -69,7 +69,7 @@ if (isset($msg)) {
                                     <label>Cv: *</label>
                               </div>
                               <div class="form-group col-lg-12">
-                                    <input type="file" id="txtCv" name="txtCv" class=""  required>
+                                    <input type="file" id="txtCv" name="txtCv" class="" >
                               </div>
                         </div>
                   </div>
