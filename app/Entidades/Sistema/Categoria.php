@@ -91,6 +91,30 @@ class Categoria extends Model
         ]);
         return $this->idtipoproductos = DB::getPdo()->lastInsertId();
     }
+    public function obtenerFiltrado()
+    {
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'T.nombrecategoria',
+
+        );
+        $sql = "SELECT 
+                    T.idtipoproducto,
+                    T.nombrecategoria
+                    FROM tipoproductos T
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( T.nombrecategoria LIKE '%" . $request['search']['value'] . "%' ";
+
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
 
 
 }
