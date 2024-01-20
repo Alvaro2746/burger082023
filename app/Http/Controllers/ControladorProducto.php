@@ -78,4 +78,41 @@ class ControladorProducto extends Controller
       
           }
 
+          public function cargarGrilla()
+          {
+              $request = $_REQUEST;
+      
+              $entidad = new Producto();
+              $aProducto = $entidad->obtenerFiltrado();
+      
+              $data = array();
+              $cont = 0;
+      
+              $inicio = $request['start'];
+              $registros_por_pagina = $request['length'];
+      
+      
+              for ($i = $inicio; $i < count($aProducto) && $cont < $registros_por_pagina; $i++) {
+                  $row = array();
+                  $row[] = '<a href="/admin/sistema/producto/' . $aProducto[$i]->idproducto . '">' . $aProducto[$i]->nombreproducto . '</a>';
+                  $row[] = $aProducto[$i]->cantidad;
+                  $row[] = $aProducto[$i]->precio;
+                  $row[] = $aProducto[$i]->fk_idtipoproducto;
+                  $row[] = $aProducto[$i]->descripcion;
+                  $row[] = $aProducto[$i]->imagen;
+
+                  $cont++;
+                  $data[] = $row;
+              }
+      
+              $json_data = array(
+                  "draw" => intval($request['draw']),
+                  "recordsTotal" => count($aProducto), //cantidad total de registros sin paginar
+                  "recordsFiltered" => count($aProducto), //cantidad total de registros en la paginacion
+                  "data" => $data,
+              );
+              return json_encode($json_data);
+          }
+      
+
 }

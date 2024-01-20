@@ -24,6 +24,8 @@ class Producto extends Model
         $this->precio = $request->input('txtPrecio');
         $this->fk_idtipoproducto = $request->input('txtCategoria');      
         $this->cantidad = $request->input('txtCantidad');
+        $this->descripcion = $request->input('txtDescripcion');
+        $this->imagen = $request->input('txtImagen');
     }
 
     
@@ -35,7 +37,9 @@ class Producto extends Model
                   nombreproducto,
                   precio,
                   fk_idtipoproducto,
-                  cantidad
+                  cantidad,
+                  descripcion,
+                  imagen
                 FROM productos ORDER BY nombreproducto";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
@@ -49,8 +53,9 @@ class Producto extends Model
                   nombreproducto,
                   precio,
                   fk_idtipoproducto,
-                  cantidad
-                FROM productos WHERE idproducto = $idproducto";
+                  cantidad,
+                  descripcion,
+                  imagen                FROM productos WHERE idproducto = $idproducto";
         $lstRetorno = DB::select($sql);
 
         if (count($lstRetorno) > 0) {
@@ -59,6 +64,8 @@ class Producto extends Model
             $this->precio = $lstRetorno[0]->precio;
             $this->fk_idtipoproducto = $lstRetorno[0]->fk_idtipoproducto;
             $this->cantidad = $lstRetorno[0]->cantidad;
+            $this->descripcion = $lstRetorno[0]->descripcion;
+            $this->imagen = $lstRetorno[0]->imagen;
             return $this;
         }
         return null;
@@ -73,6 +80,8 @@ class Producto extends Model
                 precio='$this->precio',
                 fk_idtipoproducto=$this->fk_idtipoproducto,
                 cantidad=$this->cantidad
+                descripcion=$this->descripcion
+                imagen=$this->imagen
                 
                 WHERE idproducto=?";
             $affected = DB::update($sql, [$this->idproducto]);
@@ -84,6 +93,8 @@ class Producto extends Model
             precio='$this->precio',
             fk_idtipoproducto=$this->fk_idtipoproducto,
             cantidad=$this->cantidad
+            descripcion=$this->descripcion
+            imagen=$this->imagen
             
             WHERE idproducto=?";
         $affected = DB::update($sql, [$this->idproducto]);
@@ -104,17 +115,60 @@ class Producto extends Model
                   nombreproducto,
                   precio,
                   fk_idtipoproducto,
-                  cantidad
-            ) VALUES (?, ?, ?, ?);";
+                  cantidad,
+                  descripcion,
+                  imagen  
+            ) VALUES (?, ?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->nombreproducto,
             $this->precio,
             $this->fk_idtipoproducto,
             $this->cantidad,
+            $this->descripcion,
+            $this->imagen
             
         ]);
         return $this->idproducto = DB::getPdo()->lastInsertId();
     }
+
+    public function obtenerFiltrado()
+    {
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'P.nombreproducto',
+            1 => 'P.cantidad',
+            2 => 'P.precio',
+            3 => 'P.fk_idtipoproducto',
+            4 => 'P.descripcion',
+            5 => 'P.imagen',
+        );
+        $sql = "SELECT 
+                    P.idproducto,
+                    P.nombreproducto,
+                    P.cantidad,
+                    P.precio,
+                    P.fk_idtipoproducto,
+                    P.descripcion,
+                    P.imagen
+                    FROM productos P
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( P.nombreproducto LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.cantidad LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.precio LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.fk_idtipoproducto LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.descripcion LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.imagen LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
+
 
 
 }
