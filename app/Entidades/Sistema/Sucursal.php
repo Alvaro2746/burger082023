@@ -97,6 +97,35 @@ class Sucursal extends Model
         ]);
         return $this->idsucursal = DB::getPdo()->lastInsertId();
     }
+    public function obtenerFiltrado()
+    {
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'S.nombresucursal',
+            1 => 'S.direccionsucursal',
+            2 => 'S.estado_sucursal',
+
+        );
+        $sql = "SELECT 
+                    S.idsucursal,
+                    S.nombresucursal,
+                    S.direccionsucursal,
+                    S.estado_sucursal
+                    FROM sucursales S
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( S.nombresucursal LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR S.direccionsucursal LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR S.estado_sucursal LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
 
 
 }
