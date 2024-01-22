@@ -33,6 +33,9 @@ function fsalir(){
 @section('contenido')
 <div class="panel-body">
         <div id = "msg"></div>
+        
+        
+
         <?php
 if (isset($msg)) {
     echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
@@ -44,27 +47,27 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo isset($cliente->nombre)? $cliente->nombre : ''; ?> " required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Apellido: *</label>
-                    <input type="text" id="txtApellido" name="txtApellido" class="form-control"  required>
+                    <input type="text" id="txtApellido" name="txtApellido" class="form-control" value="<?php echo isset($cliente->apellido)? $cliente->apellido : ''; ?> " required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>DNI: *</label>
-                    <input type="text" id="txtDNI" name="txtDNI" class="form-control"  required>
+                    <input type="text" id="txtDNI" name="txtDNI" class="form-control" value="<?php echo isset($cliente->dni)? $cliente->dni : ''; ?> " required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Telefono: *</label>
-                    <input type="number" id="txtTelefono" name="txtTelefono" class="form-control"  required>
+                    <input type="number" id="txtTelefono" name="txtTelefono" class="form-control" value="<?php echo isset($cliente->telefono)? $cliente->telefono : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Correo: *</label>
-                    <input type="email" id="txtCorreo" name="txtCorreo" class="form-control"  required>
+                    <input type="email" id="txtCorreo" name="txtCorreo" class="form-control" value="<?php echo isset($cliente->correo)? $cliente->correo : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Clave: *</label>
-                    <input type="password" id="txtClave" name="txtClave" class="form-control"  required>
+                    <input type="password" id="txtClave" name="txtClave" class="form-control" value="" required>
                 </div>
             
                     

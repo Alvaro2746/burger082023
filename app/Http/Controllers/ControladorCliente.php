@@ -83,7 +83,7 @@ class ControladorCliente extends Controller
 
         for ($i = $inicio; $i < count($aCliente) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = '<a href="/admin/sistema/cliente/' . $aCliente[$i]->idcliente . '">' . $aCliente[$i]->nombre . '</a>';
+            $row[] = '<a href="/admin/cliente/' . $aCliente[$i]->idcliente . '">' . $aCliente[$i]->nombre . '</a>';
             $row[] = $aCliente[$i]->apellido;
             $row[] = $aCliente[$i]->dni;
             $row[] = $aCliente[$i]->telefono;
@@ -100,7 +100,12 @@ class ControladorCliente extends Controller
         );
         return json_encode($json_data);
     }
-      
+    public function editar($id){
+        $titulo = "Edicion de cliente";
+        $cliente= new Cliente();
+        $cliente->obtenerPorId($id);
+        return view('sistema.cliente-nuevo', compact('titulo', 'cliente'));
+    }
       }
 
 
