@@ -13,8 +13,8 @@
 
 @section('scripts')
 <script>
-    globalId = '';
-    <?php $globalId = "";?>
+    globalId = '<?php echo isset($producto->idproducto) && $producto->idproducto > 0 ? $producto->idproducto : 0; ?>';
+    <?php $globalId = isset($producto->idproducto) ? $producto->idproducto : "0";?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -53,24 +53,40 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombreProducto" name="txtNombreProducto" class="form-control"  required>
+                    <input type="text" id="txtNombreProducto" name="txtNombreProducto" class="form-control"  value="<?php echo isset($producto->nombreproducto)? $producto->nombreproducto : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Cantidad: *</label>
-                    <input type="text" id="txtCantidad" name="txtCantidad" class="form-control"  required>
+                    <input type="number" id="txtCantidad" name="txtCantidad" class="form-control" value="<?php echo isset($producto->cantidad)? $producto->cantidad : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Precio: *</label>
-                    <input type="text" id="txtPrecio" name="txtPrecio" class="form-control"  required>
+                    <input type="number" id="txtPrecio" name="txtPrecio" class="form-control" value="<?php echo isset($producto->precio)? $producto->precio : ''; ?>" required>
                 </div>
                 
 
                 <div class="form-group col-lg-6">
-                    <label>Categoria: *</label>
-                    <select id="txtCategoria" name="txtCategoria" class="form-control"  required>
-                    <option  value="" selected disable>Seleccionar</option>
-
                     
+                <label>Categoria: *</label>
+                <select id="txtCategoria" name="txtCategoria" class="form-control"  required>
+
+                    @if($globalId > 0)
+                    
+                    <option  value="" disabled>Seleccionar</option>
+                    @for ($i = 0; $i < count($array_categoria); $i++)
+                            @if ($array_categoria[$i]->idtipoproducto == $producto->fk_idtipoproducto)
+                                <option selected value="{{ $array_categoria[$i]->idtipoproducto }}">{{ $array_categoria[$i]->nombrecategoria }}</option>
+                            @else
+                                <option value="{{ $array_categoria[$i]->idtipoproducto }}">{{ $array_categoria[$i]->nombrecategoria }}</option>
+                            @endif
+                        @endfor
+                        </select>
+                        </div>
+
+                    @else
+                    
+
+                    <option  value="" selected disabled>Seleccionar</option>
                     @for ($i = 0; $i < count($array_categoria); $i++)
                             @if (isset($categoria) and $array_categoria[$i]->idtipoproducto == $categoria->idtipoproducto)
                                 <option selected value="{{ $array_categoria[$i]->idtipoproducto }}">{{ $array_categoria[$i]->nombrecategoria }}</option>
@@ -79,14 +95,15 @@ if (isset($msg)) {
                             @endif
                         @endfor
                         </select>
+                        </div>
 
-                </div>
+                    @endif
                   
 
 
                 <div class="form-group col-lg-12">
                     <label>Descripcion: *</label>
-                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control"  required>
+                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="<?php echo isset($producto->descripcion)? $producto->descripcion : ''; ?>" required>
                 </div>
 
                 <div class="form-group col-lg-12">

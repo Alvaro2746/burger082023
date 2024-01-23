@@ -75,42 +75,21 @@ class Producto extends Model
 
     
       public function guardar() {
-            if ($this->clave != "")
-    {
-
-
-        
-
-
-        
-
-
+            
             $sql = "UPDATE productos SET
                 nombreproducto='$this->nombreproducto',
                 precio='$this->precio',
-                fk_idtipoproducto=$this->fk_idtipoproducto,
-                cantidad=$this->cantidad
-                descripcion=$this->descripcion
-                imagen=$this->imagen
+                fk_idtipoproducto='$this->fk_idtipoproducto',
+                cantidad='$this->cantidad',
+                descripcion='$this->descripcion',
+                imagen='$this->imagen'
                 
                 WHERE idproducto=?";
             $affected = DB::update($sql, [$this->idproducto]);
         }
-        else
-        {
-            $sql = "UPDATE productos SET
-            nombreproducto='$this->nombreproducto',
-            precio='$this->precio',
-            fk_idtipoproducto=$this->fk_idtipoproducto,
-            cantidad=$this->cantidad
-            descripcion=$this->descripcion
-            imagen=$this->imagen
-            
-            WHERE idproducto=?";
-        $affected = DB::update($sql, [$this->idproducto]);
-        }
+       
     
-    }
+    
 
     public function eliminar()
     {

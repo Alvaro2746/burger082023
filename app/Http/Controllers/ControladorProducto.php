@@ -111,7 +111,7 @@ class ControladorProducto extends Controller
       
               for ($i = $inicio; $i < count($aProducto) && $cont < $registros_por_pagina; $i++) {
                   $row = array();
-                  $row[] = '<a href="/admin/sistema/producto/' . $aProducto[$i]->idproducto . '">' . $aProducto[$i]->nombreproducto . '</a>';
+                  $row[] = '<a href="/admin/producto/' . $aProducto[$i]->idproducto . '">' . $aProducto[$i]->nombreproducto . '</a>';
                   $row[] = $aProducto[$i]->cantidad;
                   $row[] = $aProducto[$i]->precio;
                   $row[] = $aProducto[$i]->fk_idtipoproducto;
@@ -131,5 +131,15 @@ class ControladorProducto extends Controller
               return json_encode($json_data);
           }
       
+          public function editar($id){
+            $titulo = "Edicion de producto";
+            $producto= new Producto();
+            $producto->obtenerPorId($id);
 
+            $categoria = new Categoria();
+            $array_categoria = $categoria->obtenerTodos();
+
+
+            return view('sistema.producto-nuevo', compact('titulo','categoria', 'array_categoria', 'producto'));
+        }
 }
