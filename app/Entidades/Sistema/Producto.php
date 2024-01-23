@@ -11,7 +11,7 @@ class Producto extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idproducto', 'nombreproducto', 'precio', 'fk_idtipoproducto', 'cantidad'
+        'idproducto', 'nombreproducto', 'precio', 'fk_idtipoproducto', 'cantidad', 'descripcion', 'imagen'
     ];
 
     protected $hidden = [
@@ -25,7 +25,7 @@ class Producto extends Model
         $this->fk_idtipoproducto = $request->input('txtCategoria');      
         $this->cantidad = $request->input('txtCantidad');
         $this->descripcion = $request->input('txtDescripcion');
-        $this->imagen = $request->input('txtImagen');
+        $this->imagen = $request->input('archivo');
     }
 
     
@@ -71,10 +71,20 @@ class Producto extends Model
         return null;
     }
 
+
+
     
       public function guardar() {
             if ($this->clave != "")
     {
+
+
+        
+
+
+        
+
+
             $sql = "UPDATE productos SET
                 nombreproducto='$this->nombreproducto',
                 precio='$this->precio',
@@ -111,6 +121,8 @@ class Producto extends Model
 
     public function insertar()
     {
+
+
         $sql = "INSERT INTO productos (
                   nombreproducto,
                   precio,

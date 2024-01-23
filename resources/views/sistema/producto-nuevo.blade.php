@@ -95,7 +95,7 @@ if (isset($msg)) {
                                     <label>Imagen: </label>
                               </div>
                               <div class="form-group col-lg-12">
-                                    <input type="file" id="txtImagen" name="txtImagen" class="" >
+                                    <input type="file" id="archivo" name="archivo" class="" >
                               </div>
                         </div>
                   </div>

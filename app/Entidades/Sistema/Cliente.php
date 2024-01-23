@@ -79,7 +79,7 @@ class Cliente extends Model
             $sql = "UPDATE clientes SET
                 nombre='$this->nombre',
                 apellido='$this->apellido',
-                correo=$this->correo,
+                correo='$this->correo',
                 telefono='$this->telefono',
                 dni='$this->dni',
                 clave='$this->clave'
@@ -91,9 +91,9 @@ class Cliente extends Model
             $sql = "UPDATE clientes SET
             nombre='$this->nombre',
             apellido='$this->apellido',
-            correo=$this->correo,
+            correo='$this->correo',
             telefono='$this->telefono',
-            dni='$this->dni',
+            dni='$this->dni'
             WHERE idcliente=?";
         $affected = DB::update($sql, [$this->idcliente]);
         }

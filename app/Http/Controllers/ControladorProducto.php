@@ -37,6 +37,15 @@ class ControladorProducto extends Controller
                   $titulo = "Modificar Producto";
                   $entidad = new Producto();
                   $entidad->cargarDesdeRequest($request);
+
+                //   if ($_FILES["archivo"]["error"] === UPLOAD_ERR_OK) { //Se adjunta imagen
+                //     $extension = pathinfo($_FILES["archivo"]["name"], PATHINFO_EXTENSION);
+                //      $nombre = date("Ymdhmsi") . ".$extension";
+                //      $archivo = $_FILES["archivo"]["tmp_name"];
+                //      move_uploaded_file($archivo, env('APP_PATH') . "/public/files/$nombre"); //guardaelarchivo
+                //      $entidad->imagen = $nombre;
+                //  }
+      
       
                   //validaciones
                   if ($entidad->nombreproducto == "") {
@@ -58,6 +67,14 @@ class ControladorProducto extends Controller
       
                           $msg["ESTADO"] = MSG_SUCCESS;
                           $msg["MSG"] = OKINSERT;
+
+                        //   if($_FILES["archivo"]["error"] === UPLOAD_ERR_OK){
+                        //     //Eliminar imagen anterior
+                        //     @unlink(env('APP_PATH') . "/public/files/$productAnt->imagen");                          
+                        // } else {
+                        //     $entidad->imagen = $productAnt->imagen;
+                        // }
+    
                       } else {
                           //Es nuevo
                           $entidad->insertar();

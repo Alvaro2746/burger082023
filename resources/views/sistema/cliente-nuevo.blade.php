@@ -49,15 +49,15 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo isset($cliente->nombre)? $cliente->nombre : ''; ?> " required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo isset($cliente->nombre)? $cliente->nombre : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Apellido: *</label>
-                    <input type="text" id="txtApellido" name="txtApellido" class="form-control" value="<?php echo isset($cliente->apellido)? $cliente->apellido : ''; ?> " required>
+                    <input type="text" id="txtApellido" name="txtApellido" class="form-control" value="<?php echo isset($cliente->apellido)? $cliente->apellido : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>DNI: *</label>
-                    <input type="text" id="txtDNI" name="txtDNI" class="form-control" value="<?php echo isset($cliente->dni)? $cliente->dni : ''; ?> " required>
+                    <input type="text" id="txtDNI" name="txtDNI" class="form-control" value="<?php echo isset($cliente->dni)? $cliente->dni : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Telefono: *</label>
@@ -69,7 +69,7 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Clave: *</label>
-                    <input type="password" id="txtClave" name="txtClave" class="form-control" value="" required>
+                    <input type="password" id="txtClave" name="txtClave" class="form-control" value="" <?php echo isset($cliente->idcliente)? "": "required"; ?>>
                 </div>
             
                     
