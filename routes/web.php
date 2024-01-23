@@ -143,7 +143,5 @@ Route::get('/admin/categoria/cargarGrilla', 'ControladorCategoria@cargarGrilla')
 /* --------------------------------------------- */
 /* CONTROLADOR PEDIDOS                          */
 /* --------------------------------------------- */
-Route::get('/admin/pedidos', 'ControladorPedidosa@index');
-Route::get('/admin/categoria/nuevo', 'ControladorCategoria@nuevo');
-Route::post('/admin/categoria/nuevo', 'ControladorCategoria@guardar');
-Route::get('/admin/categoria/cargarGrilla', 'ControladorMenu@cargarGrilla')->name('categoria.cargarGrilla');
+Route::get('/admin/pedidos', 'ControladorPedido@index');
+Route::get('/admin/pedido/cargarGrilla', 'ControladorPedido@cargarGrilla')->name('pedido.cargarGrilla');
