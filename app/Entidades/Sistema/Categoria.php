@@ -46,7 +46,7 @@ class Categoria extends Model
         $lstRetorno = DB::select($sql);
 
         if (count($lstRetorno) > 0) {
-            $this->idtipoproducto = $lstRetorno[0]->idtipoproductos;
+            $this->idtipoproducto = $lstRetorno[0]->idtipoproducto;
             $this->nombrecategoria = $lstRetorno[0]->nombrecategoria;
             
             return $this;
@@ -56,29 +56,20 @@ class Categoria extends Model
 
     
       public function guardar() {
-            if ($this->clave != "")
-    {
-            $sql = "UPDATE tipoproductos SET
-                nombrecategoria='$this->nombre'
-
-                WHERE idtipoproductos=?";
-            $affected = DB::update($sql, [$this->idtipoproductos]);
-        }
-        else
-        {
+ 
             $sql = "UPDATE tipoproductos SET
             nombrecategoria='$this->nombrecategoria'
-            WHERE idtipoproductos=?";
-        $affected = DB::update($sql, [$this->idtipoproductos]);
-        }
+            WHERE idtipoproducto=?";
+        $affected = DB::update($sql, [$this->idtipoproducto]);
+        
     
     }
 
     public function eliminar()
     {
         $sql = "DELETE FROM tipoproductos WHERE
-            idtipoproductos=?";
-        $affected = DB::delete($sql, [$this->idtipoproductos]);
+            idtipoproducto=?";
+        $affected = DB::delete($sql, [$this->idtipoproducto]);
     }
 
     public function insertar()
@@ -89,7 +80,7 @@ class Categoria extends Model
         $result = DB::insert($sql, [
             $this->nombrecategoria,
         ]);
-        return $this->idtipoproductos = DB::getPdo()->lastInsertId();
+        return $this->idtipoproducto = DB::getPdo()->lastInsertId();
     }
     public function obtenerFiltrado()
     {

@@ -75,7 +75,7 @@ class ControladorCategoria extends Controller
       
               for ($i = $inicio; $i < count($aCategoria) && $cont < $registros_por_pagina; $i++) {
                   $row = array();
-                  $row[] = '<a href="/admin/sistema/categoria/' . $aCategoria[$i]->idtipoproducto . '">' . $aCategoria[$i]->nombrecategoria . '</a>';
+                  $row[] = '<a href="/admin/categoria/' . $aCategoria[$i]->idtipoproducto . '">' . $aCategoria[$i]->nombrecategoria . '</a>';
                   $cont++;
                   $data[] = $row;
               }
@@ -88,7 +88,12 @@ class ControladorCategoria extends Controller
               );
               return json_encode($json_data);
           }
-      
+          public function editar($id){
+            $titulo = "Edicion de Categoria";
+            $categoria= new Categoria();
+            $categoria->obtenerPorId($id);
+            return view('sistema.Categoria-nuevo', compact('titulo', 'categoria'));
+        }
       
       }
 
