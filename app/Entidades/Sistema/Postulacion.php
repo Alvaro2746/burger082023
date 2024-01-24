@@ -60,9 +60,9 @@ class Postulacion extends Model
             $this->idpostulacion = $lstRetorno[0]->idpostulacion;
             $this->nombre = $lstRetorno[0]->nombre;
             $this->apellido = $lstRetorno[0]->apellido;
-            $this->email = $lstRetorno[0]->correo;
-            $this->domicilio = $lstRetorno[0]->telefono;
-            $this->whatsapp = $lstRetorno[0]->dni;
+            $this->email = $lstRetorno[0]->email;
+            $this->domicilio = $lstRetorno[0]->domicilio;
+            $this->whatsapp = $lstRetorno[0]->whatsapp;
             return $this;
         }
         return null;
@@ -73,7 +73,7 @@ class Postulacion extends Model
             $sql = "UPDATE postulaciones SET
                 nombre='$this->nombre',
                 apellido='$this->apellido',
-                email=$this->email,
+                email='$this->email',
                 domicilio='$this->domicilio',
                 whatsapp='$this->whatsapp'
                 WHERE idpostulacion=?";

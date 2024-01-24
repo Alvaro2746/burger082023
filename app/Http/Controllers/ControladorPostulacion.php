@@ -81,7 +81,7 @@ class ControladorPostulacion extends Controller
       
               for ($i = $inicio; $i < count($aPostulacion) && $cont < $registros_por_pagina; $i++) {
                   $row = array();
-                  $row[] = '<a href="/admin/sistema/postulacion/' . $aPostulacion[$i]->idpostulacion . '">' . $aPostulacion[$i]->nombre . '</a>';
+                  $row[] = '<a href="/admin/postulacion/' . $aPostulacion[$i]->idpostulacion . '">' . $aPostulacion[$i]->nombre . '</a>';
                   $row[] = $aPostulacion[$i]->apellido;
                   $row[] = $aPostulacion[$i]->email;
                   $row[] = $aPostulacion[$i]->domicilio;
@@ -100,5 +100,11 @@ class ControladorPostulacion extends Controller
               return json_encode($json_data);
           }
       
-
+          public function editar($id){
+            $titulo = "Edicion de postulacion";
+            $postulacion= new Postulacion();
+            $postulacion->obtenerPorId($id);
+            return view('sistema.postulacion-nuevo', compact('titulo', 'postulacion'));
+        }
+    
 }

@@ -4,8 +4,10 @@
 
 @section('scripts')
 <script>
-    globalId = '';
-    <?php $globalId = "";?>
+    globalId = '<?php echo isset($postulacion->idpostulacion) && $postulacion->idpostulacion > 0 ? $postulacion->idpostulacion : 0; ?>';
+    <?php $globalId = isset($postulacion->idpostulacion) ? $postulacion->idpostulacion : "0";
+    
+    ?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -44,23 +46,23 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo isset($postulacion->nombre)? $postulacion->nombre : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Apellido: *</label>
-                    <input type="text" id="txtApellido" name="txtApellido" class="form-control"  required>
+                    <input type="text" id="txtApellido" name="txtApellido" class="form-control" value="<?php echo isset($postulacion->apellido)? $postulacion->apellido : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Whatsapp: *</label>
-                    <input type="text" id="txtWhatsapp" name="txtWhatsapp" class="form-control"  required>
+                    <input type="text" id="txtWhatsapp" name="txtWhatsapp" class="form-control" value="<?php echo isset($postulacion->whatsapp)? $postulacion->whatsapp : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Correo: *</label>
-                    <input type="email" id="txtCorreo" name="txtCorreo" class="form-control"  required>
+                    <input type="email" id="txtCorreo" name="txtCorreo" class="form-control" value="<?php echo isset($postulacion->email)? $postulacion->email : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Domicilio: *</label>
-                    <input type="text" id="txtDomicilio" name="txtDomicilio" class="form-control"  required>
+                    <input type="text" id="txtDomicilio" name="txtDomicilio" class="form-control" value="<?php echo isset($postulacion->domicilio)? $postulacion->domicilio : ''; ?>" required>
                 </div>
                 
                   <div class="form-group col-lg-12">
