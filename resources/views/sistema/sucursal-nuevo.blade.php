@@ -4,8 +4,8 @@
 
 @section('scripts')
 <script>
-    globalId = '';
-    <?php $globalId = "";?>
+    globalId = '<?php echo isset($sucursal->idsucursal) && $sucursal->idsucursal > 0 ? $sucursal->idsucursal : 0; ?>';
+    <?php $globalId = isset($sucursal->idsucursal) ? $sucursal->idsucursal : "0";?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -44,18 +44,19 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="<?php echo isset($sucursal->nombresucursal)? $sucursal->nombresucursal : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Direccion: *</label>
-                    <input type="text" id="txDireccion" name="txDireccion" class="form-control"  required>
+                    <input type="text" id="txDireccion" name="txDireccion" class="form-control" value="<?php echo isset($sucursal->direccionsucursal)? $sucursal->direccionsucursal : ''; ?>" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Estado: *</label>
-                    <select id="txtEstado" name="txtEstado" class="form-control"  required>
+                    <select id="txtEstado" name="txtEstado" class="form-control" value="" required>
                     <option  disabled value="" selected >Seleccionar</option>
-                    <option  value="1" >Cerrado</option>
-                    <option  value="2" >Abierto</option>
+                    <option  value="1" <?php if(isset($sucursal->estado_sucursal) && $sucursal->estado_sucursal==1){echo "selected";} ?>>Cerrado</option>
+                    <option  value="2" <?php if(isset($sucursal->estado_sucursal) && $sucursal->estado_sucursal==2){echo "selected";} ?> >Abierto</option>
+                   
 
                 </select>
                     

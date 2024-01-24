@@ -57,6 +57,8 @@ class Sucursal extends Model
         if (count($lstRetorno) > 0) {
             $this->idsucursal = $lstRetorno[0]->idsucursal;
             $this->nombresucursal = $lstRetorno[0]->nombresucursal;
+            $this->direccionsucursal = $lstRetorno[0]->direccionsucursal;
+            $this->estado_sucursal = $lstRetorno[0]->estado_sucursal;
             
             return $this;
         }
@@ -68,7 +70,7 @@ class Sucursal extends Model
             $sql = "UPDATE sucursales SET
                 nombresucursal='$this->nombresucursal',
                 direccionsucursal='$this->direccionsucursal',
-                estado_sucursal='$this->estado_sucursal',
+                estado_sucursal='$this->estado_sucursal'
 
 
                 WHERE idsucursal=?";

@@ -81,7 +81,7 @@ class ControladorSucursal extends Controller
         
                 for ($i = $inicio; $i < count($aSucursal) && $cont < $registros_por_pagina; $i++) {
                     $row = array();
-                    $row[] = '<a href="/admin/sistema/sucursal/' . $aSucursal[$i]->idsucursal . '">' . $aSucursal[$i]->nombresucursal . '</a>';
+                    $row[] = '<a href="/admin/sucursal/' . $aSucursal[$i]->idsucursal . '">' . $aSucursal[$i]->nombresucursal . '</a>';
                     $row[] = $aSucursal[$i]->direccionsucursal;
                     $row[] = $aSucursal[$i]->estado_sucursal;
 
@@ -96,6 +96,12 @@ class ControladorSucursal extends Controller
                     "data" => $data,
                 );
                 return json_encode($json_data);
+            }
+            public function editar($id){
+                $titulo = "Edicion de sucursal";
+                $sucursal= new Sucursal();
+                $sucursal->obtenerPorId($id);
+                return view('sistema.sucursal-nuevo', compact('titulo', 'sucursal'));
             }
         
           }
