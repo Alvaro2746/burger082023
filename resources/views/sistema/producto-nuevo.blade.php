@@ -47,7 +47,7 @@ if (isset($msg)) {
     echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
-      <form id="form1" method="POST">
+      <form id="form1"  method="POST" enctype="multipart/form-data">
             <div class="row">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>

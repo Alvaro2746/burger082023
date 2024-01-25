@@ -19,16 +19,23 @@ class Producto extends Model
     ];
 
     public function cargarDesdeRequest($request) {
+        // $this->archivo = $request->input('archivo');
+
+    
+
         $this->idproducto = $request->input('id') != "0" ? $request->input('id') : $this->idproducto;
         $this->nombreproducto = $request->input('txtNombreProducto');
         $this->precio = $request->input('txtPrecio');
         $this->fk_idtipoproducto = $request->input('txtCategoria');      
         $this->cantidad = $request->input('txtCantidad');
         $this->descripcion = $request->input('txtDescripcion');
-        $this->imagen = $request->input('archivo');
+        // $this->imagen = date("Ymdhmsi").$request->input('archivo');
     }
 
-    
+    public function mostrarImagen($rutaArchivo)
+    {
+        return response()->file(storage_path("app/archivos/{$this->imagen}"));
+    }
 
     public function obtenerTodos()
     {
@@ -55,7 +62,8 @@ class Producto extends Model
                   fk_idtipoproducto,
                   cantidad,
                   descripcion,
-                  imagen                FROM productos WHERE idproducto = $idproducto";
+                  imagen                
+                  FROM productos WHERE idproducto = $idproducto";
         $lstRetorno = DB::select($sql);
 
         if (count($lstRetorno) > 0) {
