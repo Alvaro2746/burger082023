@@ -94,7 +94,19 @@ class ControladorCategoria extends Controller
             $categoria->obtenerPorId($id);
             return view('sistema.Categoria-nuevo', compact('titulo', 'categoria'));
         }
-      
+        public function eliminar(Request $request)
+        {
+            $id = $request->input('id');
+    
+                    $entidad = new Categoria();
+                    $entidad->cargarDesdeRequest($request);
+                                        
+                    $entidad->eliminar();
+                    
+                    return view('sistema.categoria-listar', compact('cliente'));
+
+        }
+
       }
 
 

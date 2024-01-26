@@ -63,6 +63,24 @@ if (isset($msg)) {
                 return false;
             }
         }
+        function eliminar() {
+            $.ajax({
+                type: "GET",
+                url: "{{ asset('admin/categoria/eliminar') }}",
+                data: { id:globalId },
+                async: true,
+                dataType: "json",
+                success: function (data) {
+                    if (data.err = "0") {
+                        msgShow("Registro eliminado exitosamente.", "success");
+                    } else {
+                        msgShow(data.err, "danger");
+                    }
+                    $('#mdlEliminar').modal('toggle');
+                }
+            });
+        }
+
 </script>
                 
 @endsection
