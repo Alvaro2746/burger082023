@@ -44,6 +44,7 @@ if (isset($msg)) {
         "order": [[ 0, "asc" ]],
 	    "ajax": "{{ route('sucursal.cargarGrilla') }}"
 	});
+
 </script>
 
 

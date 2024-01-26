@@ -103,5 +103,16 @@ class ControladorSucursal extends Controller
                 $sucursal->obtenerPorId($id);
                 return view('sistema.sucursal-nuevo', compact('titulo', 'sucursal'));
             }
+            public function eliminar(Request $request)
+            {
         
+                        $entidad = new Sucursal();
+                        $entidad->cargarDesdeRequest($request);
+                                            
+                        $entidad->eliminar();
+                        
+                        return view('sistema.sucursal-listar', compact('entidad'));
+    
+            }
+    
           }

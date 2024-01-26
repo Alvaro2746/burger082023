@@ -115,7 +115,7 @@ class ControladorCliente extends Controller
                                         
                     $entidad->eliminar();
                     
-                    return view('sistema.cliente-listar', compact('cliente'));
+                    return view('sistema.cliente-listar', compact('entidad'));
 
         }
         
