@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Sucursal;
+use App\Entidades\Sistema\Pedido;
 require app_path().'/start/constants.php';
 
 class ControladorSucursal extends Controller
@@ -105,16 +106,20 @@ class ControladorSucursal extends Controller
             }
             public function eliminar(Request $request)
             {
+                $id = $request->input('id');
+
+                        $pedido= new Pedido();
+                        $aPedidos=$pedido->obtenerPorSucursal($id);
+                        if(count($aPedidos) == 0){
+                            $sucursal = new Sucursal();
+                            $sucursal->idsucursal=$id;
+                            $sucursal->eliminar();
+                            $data["err"]="OK";
+                            }else{
+                                $data["err"] = "No se puede eliminar sucursal con pedidos asociados";
+                            }
+                            return json_encode($data);                    
         
-                        $entidad = new Sucursal();
-                        $entidad->cargarDesdeRequest($request);
-                                            
-                        $entidad->eliminar();
-                        $data["err"]=0;
-                        return json_encode($data);                    
-                            
-                        return view('sistema.sucursal-listar', compact('entidad'));
-    
             }
     
           }
