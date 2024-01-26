@@ -106,5 +106,17 @@ class ControladorPostulacion extends Controller
             $postulacion->obtenerPorId($id);
             return view('sistema.postulacion-nuevo', compact('titulo', 'postulacion'));
         }
+        public function eliminar(Request $request)
+        {
+            $id = $request->input('id');
     
+                    $entidad = new Postulacion();
+                    $entidad->cargarDesdeRequest($request);
+                                        
+                    $entidad->eliminar();
+                    
+                    return view('sistema.postulacion-listar', compact('cliente'));
+
+        }
+
 }
