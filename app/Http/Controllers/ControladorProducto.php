@@ -207,12 +207,6 @@ public function storeFile(Request $req)
                         @unlink(env('APP_PATH') . "/public/files/$producto->imagen");                          
                     }
                     return view('sistema.producto-listar', compact('producto'));
-
-
-
         }
-        
-
-        
 
 }

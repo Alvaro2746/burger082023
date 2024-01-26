@@ -106,6 +106,20 @@ class ControladorCliente extends Controller
         $cliente->obtenerPorId($id);
         return view('sistema.cliente-nuevo', compact('titulo', 'cliente'));
     }
+            public function eliminar(Request $request)
+        {
+            $id = $request->input('id');
+    
+                    $entidad = new Cliente();
+                    $entidad->cargarDesdeRequest($request);
+                                        
+                    $entidad->eliminar();
+                    
+                    return view('sistema.cliente-listar', compact('cliente'));
+
+        }
+        
+
       }
 
 
