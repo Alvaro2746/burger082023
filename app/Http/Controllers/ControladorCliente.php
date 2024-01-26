@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Cliente;
+use App\Entidades\Sistema\Pedido;
 require app_path().'/start/constants.php';
 
 class ControladorCliente extends Controller
@@ -110,13 +111,18 @@ class ControladorCliente extends Controller
         {
             $id = $request->input('id');
     
-                    $entidad = new Cliente();
-                    $entidad->cargarDesdeRequest($request);
-                                        
-                    $entidad->eliminar();
-                    $data["err"]=0;
-                    return json_encode($data);                    
-                    return view('sistema.cliente-listar', compact('entidad'));
+                    //si no tiene ventas, eliminar cliente
+                    $pedido= new Pedido();
+                    $aPedidos=$pedido->obtenerPorCliente($id);
+                    if(count($aPedidos) == 0){
+                        $cliente = new Cliente();
+                        $cliente->idcliente=$id;
+                        $cliente->eliminar();
+                        $data["err"]="OK";
+                        }else{
+                            $data["err"] = "No se puede eliminar cliente con pedidos asociados";
+                        }
+                        return json_encode($data);                    
 
         }
         
