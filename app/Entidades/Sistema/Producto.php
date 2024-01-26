@@ -167,6 +167,21 @@ class Producto extends Model
         return $lstRetorno;
     }
 
+    public function obtenerPorCategoria($idtipoproducto)
+    {
+        $sql = "SELECT
+                  idproducto,
+                  nombreproducto,
+                  precio,
+                  fk_idtipoproducto,
+                  cantidad,
+                  descripcion,
+                  imagen
+                FROM productos 
+                WHERE fk_idtipoproducto = $idtipoproducto";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
+    }
 
 
 }
