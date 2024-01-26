@@ -102,7 +102,9 @@ class ControladorCategoria extends Controller
                     $entidad->cargarDesdeRequest($request);
                                         
                     $entidad->eliminar();
-                    
+                    $data["err"]=0;
+                    return json_encode($data);                    
+
                     return view('sistema.categoria-listar', compact('cliente'));
 
         }

@@ -16,6 +16,7 @@
     globalId = '<?php echo isset($producto->idproducto) && $producto->idproducto > 0 ? $producto->idproducto : 0; ?>';
     <?php $globalId = isset($producto->idproducto) ? $producto->idproducto : "0";?>
 </script>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
 @endsection
 @section('breadcrumb')
 <ol class="breadcrumb">
@@ -103,7 +104,7 @@ if (isset($msg)) {
 
                 <div class="form-group col-lg-12">
                     <label>Descripcion: *</label>
-                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="<?php echo isset($producto->descripcion)? $producto->descripcion : ''; ?>" required>
+                    <textarea type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="" required><?php echo isset($producto->descripcion)? $producto->descripcion : ''; ?></textarea>
                 </div>
 
                 <div class="form-group col-lg-12">
@@ -117,13 +118,7 @@ if (isset($msg)) {
                         </div>
                   </div>
 
-                <script>
-                  ClassicEditor
-                  .create(document.querySelector("txtDescripcion"))
-                  .catch(error =>{
-                        console.error(error);
-                  });
-                </script>
+                
             
                     
             </div>
@@ -157,6 +152,12 @@ if (isset($msg)) {
                 }
             });
         }
+        ClassicEditor
+        .create( document.querySelector( '#txtDescripcion' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+
 </script>
                 
 @endsection

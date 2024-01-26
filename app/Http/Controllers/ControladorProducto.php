@@ -202,6 +202,8 @@ public function storeFile(Request $req)
                     $producto->obtenerPorId($id);
                     
                     $entidad->eliminar();
+                    $data["err"]=0;
+                    return json_encode($data);                    
                     if(isset($producto->imagen))
                     {
                         @unlink(env('APP_PATH') . "/public/files/$producto->imagen");                          

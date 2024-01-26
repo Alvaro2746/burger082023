@@ -8,7 +8,9 @@
     <?php $globalId = isset($cliente->idcliente) ? $cliente->idcliente : "0";
     
     ?>
+    
 </script>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
 @endsection
 @section('breadcrumb')
 <ol class="breadcrumb">
