@@ -57,24 +57,11 @@ public function storeFile(Request $req)
 
       public function guardar(Request $request)
       {
-        
-        // $request->validate([
-        //     'archivo' => 'required|mimes:png,jpg,jpeg|max:2048', // Validación del tipo y tamaño del archivo
-        // ]);
-    
-        // // Obtiene el archivo cargado
-        // $archivo = $request->file('archivo');
-        // $name = date("Ymdhmsi");
-    
-        // // Almacena el archivo en el disco local
-        // $ruta = $archivo->storeAs('archivos', $name.$archivo->getClientOriginalName(),'public');
-
             try {
                   //Define la entidad servicio
                   $titulo = "Modificar Producto";
                   $entidad = new Producto();
                   $entidad->cargarDesdeRequest($request);
-
 
 
 
@@ -92,46 +79,51 @@ public function storeFile(Request $req)
                         $entidad -> imagen = $nombre;
         
                         //Eliminar la imagen anterior
-                        if (isset($producto) && file_exists(env('APP_PATH') . "/public/files/$producto->imagen")) {
-                            unlink(env('APP_PATH') . "/public/files/$producto->imagen");
-                        // }
+                        
+                    
                     }
+                }else{
+                    $id = $entidad->idproducto;
+                    $producto = new Producto();
+                    $producto->obtenerPorId($id);
+
+                    $entidad -> imagen = $producto->imagen;
+                }
                 
-        
+                    
                   //validaciones
                   if ($entidad->nombreproducto == "") {
                         
                       $msg["ESTADO"] = MSG_ERROR;
                       $msg["MSG"] = "Complete todos los datos";
 
-                      $id = $entidad->idproducto;
-                      $producto = new Producto();
-                      $producto->obtenerPorId($id);
+                      
     
                       return view('sistema.producto-nuevo', compact('msg', 'producto', 'titulo', 'array_producto', 'array_producto_grupo')) . '?id=' . $producto->idproducto;
-        
                   } else {
                         
                       if ($_POST["id"] > 0) {
                           //Es actualizacion
+                          $id = $entidad->idproducto;
+                          $producto = new Producto();
+                          $producto->obtenerPorId($id);
+
+
+
+                        if(isset($_FILES["archivo"]) && $_FILES["archivo"]["error"] === UPLOAD_ERR_OK)
+                        {
+                            
+                            @unlink(env('APP_PATH') . "/public/files/$producto->imagen");                          
+                        }
                           $entidad->guardar();
 
-                          
-      
                           $msg["ESTADO"] = MSG_SUCCESS;
                           $msg["MSG"] = OKINSERT;
-
-                        //   if($_FILES["archivo"]["error"] === UPLOAD_ERR_OK){
-                        //     //Eliminar imagen anterior
-                        //     @unlink(env('APP_PATH') . "/public/files/$productAnt->imagen");                          
-                        // } else {
-                        //     $entidad->imagen = $productAnt->imagen;
-                        // }
     
                       } else {
                           //Es nuevo
-                          $entidad->insertar();
-      
+                            $entidad->insertar();
+
                           $msg["ESTADO"] = MSG_SUCCESS;
                           $msg["MSG"] = OKINSERT;
                       }
@@ -140,7 +132,7 @@ public function storeFile(Request $req)
                       return view('sistema.producto-listar', compact('titulo', 'msg'));
                       $titulo="Listado de productos";
                   }
-              } }}catch (Exception $e) {
+               }catch (Exception $e) {
                   $msg["ESTADO"] = MSG_ERROR;
                   $msg["MSG"] = ERRORINSERT;
               }
@@ -162,20 +154,16 @@ public function storeFile(Request $req)
               $inicio = $request['start'];
               $registros_por_pagina = $request['length'];
       
-      
               for ($i = $inicio; $i < count($aProducto) && $cont < $registros_por_pagina; $i++) {
-                $rutaImagen = storage_path("app\public\archivos\\{$aProducto[$i]->imagen}");
-
                   $row = array();
                   $row[] = '<a href="/admin/producto/' . $aProducto[$i]->idproducto . '">' . $aProducto[$i]->nombreproducto . '</a>';
                   $row[] = $aProducto[$i]->cantidad;
                   $row[] = $aProducto[$i]->precio;
                   $row[] = $aProducto[$i]->fk_idtipoproducto;
                   $row[] = $aProducto[$i]->descripcion;
-                  $row[] = $row[] = '<img src="'.$rutaImagen.'" alt="" class="">';
-
-                  
-
+                  $row[] = '<img src="'.'/files/'.$aProducto[$i]->imagen.'" alt="Imagen del producto" class="img-thumbnail"></img>';
+                   
+                //$row[] = '<img src="'.$aProducto[$i]->imagen.'" alt="" class="">';                
                   $cont++;
                   $data[] = $row;
               }
@@ -194,10 +182,37 @@ public function storeFile(Request $req)
             $producto= new Producto();
             $producto->obtenerPorId($id);
 
+
+
             $categoria = new Categoria();
             $array_categoria = $categoria->obtenerTodos();
 
-
             return view('sistema.producto-nuevo', compact('titulo','categoria', 'array_categoria', 'producto'));
         }
+        public function eliminar(Request $request)
+        {
+            $id = $request->input('id');
+    
+    
+                    $entidad = new Producto();
+                    $entidad->cargarDesdeRequest($request);
+                    
+                    $id = $entidad->idproducto;
+                    $producto = new Producto();
+                    $producto->obtenerPorId($id);
+                    
+                    $entidad->eliminar();
+                    if(isset($producto->imagen))
+                    {
+                        @unlink(env('APP_PATH') . "/public/files/$producto->imagen");                          
+                    }
+                    return view('sistema.producto-listar', compact('producto'));
+
+
+
+        }
+        
+
+        
+
 }

@@ -29,7 +29,6 @@ class Producto extends Model
         $this->fk_idtipoproducto = $request->input('txtCategoria');      
         $this->cantidad = $request->input('txtCantidad');
         $this->descripcion = $request->input('txtDescripcion');
-        // $this->imagen = date("Ymdhmsi").$request->input('archivo');
     }
 
     public function mostrarImagen($rutaArchivo)
