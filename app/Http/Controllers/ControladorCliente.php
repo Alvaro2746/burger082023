@@ -105,6 +105,8 @@ class ControladorCliente extends Controller
         $titulo = "Edicion de cliente";
         $cliente= new Cliente();
         $cliente->obtenerPorId($id);
+
+
         return view('sistema.cliente-nuevo', compact('titulo', 'cliente'));
     }
             public function eliminar(Request $request)
@@ -114,6 +116,7 @@ class ControladorCliente extends Controller
                     //si no tiene ventas, eliminar cliente
                     $pedido= new Pedido();
                     $aPedidos=$pedido->obtenerPorCliente($id);
+                    
                     if(count($aPedidos) == 0){
                         $cliente = new Cliente();
                         $cliente->idcliente=$id;

@@ -182,6 +182,54 @@ class Producto extends Model
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
+    public function obtenerFiltradoProducto()
+    {
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'P.imagen',
+            1 => 'P.nombreproducto',
+            2 => 'P.cantidad',
+            3 => 'P.comentarios',
+            4 => 'P.precio',
 
+        );
+        $sql = "SELECT 
+                    P.idproducto,
+                    P.imagen,
+                    P.nombreproducto,
+                    P.cantidad,
+                    P.descripcion,
+                    P.precio
+                    FROM productos P
+                ";
 
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( P.imagen LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.nombreproducto LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.cantidad LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.descripcion LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.precio LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
+    public function obtenerPorIdProducto($idproducto)
+    {
+        $sql = "SELECT
+                  idproducto,
+                  nombreproducto,
+                  precio,
+                  fk_idtipoproducto,
+                  cantidad,
+                  descripcion,
+                  imagen                
+                  FROM productos WHERE idproducto = $idproducto";
+        $lstRetorno = DB::select($sql);
+
+            return $lstRetorno;
+    }
 }

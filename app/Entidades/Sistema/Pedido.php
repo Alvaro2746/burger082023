@@ -18,7 +18,8 @@ class Pedido extends Model
       'fecha',
       'metodo_pago',
       'fk_idsucursal',
-      'fk_idcliente'
+      'fk_idcliente',
+      'comentarios'
 
     ];
 
@@ -26,15 +27,15 @@ class Pedido extends Model
 
     ];
 
-//     public function cargarDesdeRequest($request) {
-//         $this->idpedido = $request->input('id') != "0" ? $request->input('id') : $this->idpedido;
-//         $this->total = $request->input('txtNombre');
-//         $this->fk_idcarrito = $request->input('txtApellido');
-//         $this->fk_idestado = $request->input('txtCorreo');
-//         $this->metodo_pago = $request->input('txtTelefono');
-//         $this->fk_idsucursal = $request->input('txtDNI');
-//         $this->fk_idcliente = $request->input('txtDNI');
-//     }
+    public function cargarDesdeRequest($request) {
+        $this->idpedido = $request->input('id') != "0" ? $request->input('id') : $this->idcliente;
+        $this->fk_idcliente = $request->input('txtCliente');
+        $this->fk_idsucursal = $request->input('txtSucursal');
+        $this->fecha = $request->input('txtFecha');
+        $this->fk_idestado = $request->input('txtEstado');
+        $this->comentarios = $request->input('txtComentarios');
+        $this->metodo_pago = $request->input('txtPago');
+    }
 
     
 
@@ -48,6 +49,7 @@ class Pedido extends Model
                   fecha,
                   metodo_pago,
                   fk_idsucursal,
+                  comentarios,
                   fk_idcliente
                 FROM pedidos ORDER BY total";
         $lstRetorno = DB::select($sql);
@@ -65,6 +67,7 @@ class Pedido extends Model
                   fecha,
                   metodo_pago,
                   fk_idsucursal,
+                  comentarios,
                   fk_idcliente
                 FROM pedidos WHERE idpedido = $idpedido";
         $lstRetorno = DB::select($sql);
@@ -77,6 +80,7 @@ class Pedido extends Model
             $this->fecha = $lstRetorno[0]->fecha;
             $this->metodo_pago = $lstRetorno[0]->metodo_pago;
             $this->fk_idsucursal = $lstRetorno[0]->fk_idsucursal;
+            $this->comentarios = $lstRetorno[0]->comentarios;
             $this->fk_idcliente = $lstRetorno[0]->fk_idcliente;
             return $this;
         }
@@ -85,15 +89,12 @@ class Pedido extends Model
 
     
       public function guardar() {
+
+
           
             $sql = "UPDATE pedidos SET
-                total='$this->total',
-                fk_idcarrito='$this->fk_idcarrito',
                 fk_idestado=$this->fk_idestado,
-                fecha=$this->fecha,
-                metodo_pago='$this->metodo_pago',
-                fk_idsucursal='$this->fk_idsucursal',
-                fk_idcliente='$this->fk_idcliente'
+                metodo_pago='$this->metodo_pago'
                 WHERE idpedido=?";
             $affected = DB::update($sql, [$this->idpedido]);
         }
@@ -111,21 +112,19 @@ class Pedido extends Model
     public function insertar()
     {
         $sql = "INSERT INTO pedidos (
-                  total,
-                  fk_idcarrito,
                   fk_idestado,
                   fecha,
                   metodo_pago,
                   fk_idsucursal,
+                  comentarios,
                   fk_idcliente
-            ) VALUES (?, ?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
-            $this->total,
-            $this->fk_idcarrito,
             $this->fk_idestado,
             $this->fecha,
             $this->metodo_pago,
             $this->fk_idsucursal,
+            $this->comentarios,
             $this->fk_idcliente,
         ]);
         return $this->idpedido = DB::getPdo()->lastInsertId();
@@ -142,6 +141,7 @@ class Pedido extends Model
             4 => 'P.metodo_pago',
             5 => 'P.fk_idsucursal',
             6 => 'P.fk_idcliente',
+            7 => 'P.comentarios',
         );
         $sql = "SELECT 
                     P.idpedido,
@@ -151,8 +151,11 @@ class Pedido extends Model
                     P.fecha,
                     P.fk_idsucursal,
                     P.metodo_pago,
+                    P.comentarios,
                     P.fk_idcliente
                     FROM pedidos P
+
+                    
                 ";
 
         //Realiza el filtrado
@@ -164,6 +167,7 @@ class Pedido extends Model
             $sql .= " OR P.metodo_pago LIKE '%" . $request['search']['value'] . "%' )";
             $sql .= " OR P.fk_idsucursal LIKE '%" . $request['search']['value'] . "%' )";
             $sql .= " OR P.fk_idcliente LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.comentarios LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
 
@@ -181,6 +185,7 @@ class Pedido extends Model
                   fecha,
                   metodo_pago,
                   fk_idsucursal,
+                  comentarios,
                   fk_idcliente
                 FROM pedidos 
                 WHERE fk_idcliente = $idcliente";
@@ -197,6 +202,7 @@ class Pedido extends Model
                   fecha,
                   metodo_pago,
                   fk_idsucursal,
+                  comentarios,
                   fk_idcliente
                 FROM pedidos 
                 WHERE fk_idsucursal = $idsucursal";

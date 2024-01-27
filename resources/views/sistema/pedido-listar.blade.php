@@ -32,6 +32,7 @@ if (isset($msg)) {
             <th>metodo pago</th>
             <th>id sucursal</th>
             <th>id cliente</th>
+            <th>comentarios</th>
         </tr>
     </thead>
 </table> 
