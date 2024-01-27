@@ -13,14 +13,36 @@ class ControladorSucursal extends Controller
 {
       public function nuevo()
       {
-            $titulo = "Nueva sucursal";
-            return view('sistema.sucursal-nuevo', compact('titulo'));
+        $titulo = "Nueva sucursal";
+
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("SUCURSALALTA")) {
+                $codigo = "SUCURSALALTA";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                return view('sistema.sucursal-nuevo', compact('titulo'));
+            }
+        } else {
+            return redirect('admin/login');
+        }
       
       }
       public function index()
       {
-            $titulo = "Listado de Sucursales";
-            return view('sistema.sucursal-listar', compact('titulo'));
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("SUCURSALCONSULTA")) {
+                $codigo = "SUCURSALCONSULTA";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $titulo = "Listado de Sucursales";
+                return view('sistema.sucursal-listar', compact('titulo'));
+                }
+        } else {
+            return redirect('admin/login');
+        }
+
 
       }
       public function guardar(Request $request)
@@ -103,13 +125,31 @@ class ControladorSucursal extends Controller
             }
             public function editar($id){
                 $titulo = "Edicion de sucursal";
-                $sucursal= new Sucursal();
-                $sucursal->obtenerPorId($id);
-                return view('sistema.sucursal-nuevo', compact('titulo', 'sucursal'));
+
+                if (Usuario::autenticado() == true) {
+                    if (!Patente::autorizarOperacion("SUCURSALEDITAR")) {
+                        $codigo = "SUCURSALEDITAR";
+                        $mensaje = "No tiene permisos para la operación.";
+                        return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+                    } else {
+                        $sucursal= new Sucursal();
+                        $sucursal->obtenerPorId($id);
+                        return view('sistema.sucursal-nuevo', compact('titulo', 'sucursal'));                    }
+                } else {
+                    return redirect('admin/login');
+                }
+                
             }
             public function eliminar(Request $request)
             {
-                $id = $request->input('id');
+
+                if (Usuario::autenticado() == true) {
+                    if (!Patente::autorizarOperacion("SUCURSALBAJA")) {
+                        $codigo = "SUCURSALBAJA";
+                        $mensaje = "No tiene permisos para la operación.";
+                        return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+                    } else {
+                        $id = $request->input('id');
 
                         $pedido= new Pedido();
                         $aPedidos=$pedido->obtenerPorSucursal($id);
@@ -122,6 +162,10 @@ class ControladorSucursal extends Controller
                                 $data["err"] = "No se puede eliminar sucursal con pedidos asociados";
                             }
                             return json_encode($data);                    
+                    }
+                } else {
+                    return redirect('admin/login');
+                }
         
             }
     
