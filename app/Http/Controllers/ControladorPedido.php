@@ -14,13 +14,39 @@ class ControladorPedido extends Controller
       public function nuevo()
       {
             $titulo = "Nuevo Pedido";
-            return view('sistema.pedido-nuevo', compact('titulo'));
+
+            if (Usuario::autenticado() == true) {
+                if (!Patente::autorizarOperacion("PEDIDOALTA")) {
+                    $codigo = "PEDIDOALTA";
+                    $mensaje = "No tiene permisos para la operación.";
+                    return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+                } else {
+                    return view('sistema.pedido-nuevo', compact('titulo'));
+                }
+            } else {
+                return redirect('admin/login');
+            }
+
+            
       }
 
       public function index()
       {
             $titulo = "Listado de Pedidos";
-            return view('sistema.pedido-listar', compact('titulo'));
+
+            if (Usuario::autenticado() == true) {
+                if (!Patente::autorizarOperacion("PEDIDOCONSULTA")) {
+                    $codigo = "PEDIDOCONSULTA";
+                    $mensaje = "No tiene permisos para la operación.";
+                    return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+                } else {
+                    return view('sistema.pedido-listar', compact('titulo'));
+                }
+            } else {
+                return redirect('admin/login');
+            }
+
+            
 
       }
 
@@ -64,30 +90,32 @@ class ControladorPedido extends Controller
     public function editar($id){
         $titulo = "Edicion de Pedido";
 
-        $pedido= new Pedido();
-        $pedido->obtenerPorId($id);
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("PEDIDOEDITAR")) {
+                $codigo = "PEDIDOEDITAR";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $pedido= new Pedido();
+                $pedido->obtenerPorId($id);
+                
+                $productoPedido = new Productopedido();
+                $aProductoPedidos = $productoPedido-> obtenerTodosPorPedido($pedido->idpedido);
         
-
-        $productoPedido = new Productopedido();
-        $aProductoPedidos = $productoPedido-> obtenerTodosPorPedido($pedido->idpedido);
-
-        $producto = new Producto();
+                $producto = new Producto();
         
-    
-        for($i=0; $i<count($aProductoPedidos);$i++){
-            $idaux=$aProductoPedidos[$i]->fk_idproducto;
-            $aProductosaux = $producto->obtenerPorIdProducto($idaux); 
-            $aProductos[]=$aProductosaux;
+                for($i=0; $i<count($aProductoPedidos);$i++){
+                    $idaux=$aProductoPedidos[$i]->fk_idproducto;
+                    $aProductosaux = $producto->obtenerPorIdProducto($idaux); 
+                    $aProductos[]=$aProductosaux;
+                }
+                $tamanioGrilla=count($aProductos);
+        
+                return view('sistema.pedido-nuevo', compact('titulo', 'pedido', 'aProductoPedidos', 'aProductos', 'tamanioGrilla'));
+                    }
+        } else {
+            return redirect('admin/login');
         }
-        $tamanioGrilla=count($aProductos);
-        
-
-        
-
-        return view('sistema.pedido-nuevo', compact('titulo', 'pedido', 'aProductoPedidos', 'aProductos', 'tamanioGrilla'));
-
-
-
     }
 
     public function cargarGrillaProducto()
