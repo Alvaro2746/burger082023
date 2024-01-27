@@ -92,8 +92,8 @@ if (isset($msg)) {
       </form>
 
 
-<table id="" class="table table-bordered">
-    <thead>
+<table id="" class="table table-striped">
+    <thead class="table-dark">
         <tr>
             <th>Producto</th>
             <th>Nombre</th>

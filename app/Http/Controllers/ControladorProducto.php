@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Producto;
 use App\Entidades\Sistema\Categoria;
+use App\Entidades\Sistema\Usuario;
+use App\Entidades\Sistema\Patente;
 use Illuminate\Support\Facades\Storage;
 
 require app_path().'/start/constants.php';
@@ -12,46 +14,51 @@ class ControladorProducto extends Controller
 {
       public function nuevo()
       {
-            $titulo = "Nuevo Producto";
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("PRODUCTOCONSULTA")) {
+                $codigo = "PRODUCTOCONSULTA";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $titulo = "Nuevo Producto";
 
-            $categoria = new Categoria();
-            $array_categoria = $categoria->obtenerTodos();
-
-            //  print_r($array_categoria);
-            //  exit;
-            
-            return view('sistema.producto-nuevo', compact('titulo', 'categoria', 'array_categoria' ));
-
-
+                $categoria = new Categoria();
+                $array_categoria = $categoria->obtenerTodos();
     
-            
+                //  print_r($array_categoria);
+                //  exit;
+                
+                return view('sistema.producto-nuevo', compact('titulo', 'categoria', 'array_categoria' ));
+                }
+        } else {
+            return redirect('admin/login');
+
+        }
+
       }
       public function index()
       {
-            $titulo = "Listado de Productos";
-            return view('sistema.Producto-listar', compact('titulo'));
+
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("PRODUCTOCONSULTA")) {
+                $codigo = "PRODUCTOCONSULTA";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $titulo = "Listado de Productos";
+                return view('sistema.Producto-listar', compact('titulo'));
+                }
+        } else {
+            return redirect('admin/login');
+        }
+
 
       }
 
 
 
 
-public function storeFile(Request $req)
-{
-    
-    
-    $request->validate([
-        'archivo' => 'required|mimes:png,jpg,jpeg|max:2048', // Validación del tipo y tamaño del archivo
-    ]);
 
-    // Obtiene el archivo cargado
-    $archivo = $request->file('archivo');
-    $name = date("Ymdhmsi");
-
-    // Almacena el archivo en el disco local
-    $ruta = $archivo->storeAs('archivos', $name.$archivo->getClientOriginalName(),'public');
-    
-}
 
 
 
@@ -179,36 +186,60 @@ public function storeFile(Request $req)
       
           public function editar($id){
             $titulo = "Edicion de producto";
-            $producto= new Producto();
-            $producto->obtenerPorId($id);
 
 
+            if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("PRODUCTOEDITAR")) {
+                $codigo = "PRODUCTOEDITAR";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $producto= new Producto();
+                $producto->obtenerPorId($id);
+    
+                $categoria = new Categoria();
+                $array_categoria = $categoria->obtenerTodos();
+    
+                return view('sistema.producto-nuevo', compact('titulo','categoria', 'array_categoria', 'producto'));
+                }
+        } else {
+            return redirect('admin/login');
+        }
 
-            $categoria = new Categoria();
-            $array_categoria = $categoria->obtenerTodos();
 
-            return view('sistema.producto-nuevo', compact('titulo','categoria', 'array_categoria', 'producto'));
         }
         public function eliminar(Request $request)
         {
-            $id = $request->input('id');
+
+            if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("PRODUCTOELIMINAR	")) {
+                $codigo = "PRODUCTOELIMINAR	";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $id = $request->input('id');
     
     
-                    $entidad = new Producto();
-                    $entidad->cargarDesdeRequest($request);
-                    
-                    $id = $entidad->idproducto;
-                    $producto = new Producto();
-                    $producto->obtenerPorId($id);
-                    
-                    $entidad->eliminar();
-                    $data["err"]=0;
-                    return json_encode($data);                    
-                    if(isset($producto->imagen))
-                    {
-                        @unlink(env('APP_PATH') . "/public/files/$producto->imagen");                          
-                    }
-                    return view('sistema.producto-listar', compact('producto'));
+                $entidad = new Producto();
+                $entidad->cargarDesdeRequest($request);
+                
+                $id = $entidad->idproducto;
+                $producto = new Producto();
+                $producto->obtenerPorId($id);
+                
+                $entidad->eliminar();
+                $data["err"]=0;
+                return json_encode($data);                    
+                if(isset($producto->imagen))
+                {
+                    @unlink(env('APP_PATH') . "/public/files/$producto->imagen");                          
+                }
+                return view('sistema.producto-listar', compact('producto'));
+        }
+        } else {
+            return redirect('admin/login');
+        }
+
         }
 
 
