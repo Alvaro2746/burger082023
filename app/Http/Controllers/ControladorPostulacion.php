@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Postulacion;
+use App\Entidades\Sistema\Usuario;
+use App\Entidades\Sistema\Patente;
 require app_path().'/start/constants.php';
 
 class ControladorPostulacion extends Controller

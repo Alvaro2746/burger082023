@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Sucursal;
 use App\Entidades\Sistema\Pedido;
+use App\Entidades\Sistema\Usuario;
+use App\Entidades\Sistema\Patente;
+
 require app_path().'/start/constants.php';
 
 class ControladorSucursal extends Controller

@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Entidades\Sistema\Pedido;
 use App\Entidades\Sistema\Producto;
 use App\Entidades\Sistema\Productopedido;
+use App\Entidades\Sistema\Usuario;
+use App\Entidades\Sistema\Patente;
 require app_path().'/start/constants.php';
 
 class ControladorPedido extends Controller
