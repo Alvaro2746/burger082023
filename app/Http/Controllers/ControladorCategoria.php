@@ -14,8 +14,8 @@ class ControladorCategoria extends Controller
       public function nuevo()
       {
         if (Usuario::autenticado() == true) {
-            if (!Patente::autorizarOperacion("CONSULTAALTA")) {
-                $codigo = "CONSULTAALTA";
+            if (!Patente::autorizarOperacion("PRODUCTOCONSULTA")) {
+                $codigo = "PRODUCTOCONSULTA";
                 $mensaje = "No tiene permisos para la operación.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
@@ -32,8 +32,8 @@ class ControladorCategoria extends Controller
       public function index()
       {
         if (Usuario::autenticado() == true) {
-            if (!Patente::autorizarOperacion("CLIENTEALTA")) {
-                $codigo = "CLIENTEALTA";
+            if (!Patente::autorizarOperacion("PRODUCTOCONSULTA")) {
+                $codigo = "PRODUCTOCONSULTA";
                 $mensaje = "No tiene permisos para la operación.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
