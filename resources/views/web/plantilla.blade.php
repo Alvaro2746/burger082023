@@ -90,12 +90,28 @@
                 </div></a>
                 @endif
 
-    <a class="btn-sm-square bg-white rounded-circle ms-3" href="/cuenta">
-        <small class="fa fa-user text-body"></small>
-    </a>
-    <a class="btn-sm-square bg-white rounded-circle ms-3" href="/carrito">
-        <small class="fa fa-shopping-bag text-body"></small>
-    </a>
+                @if(session('correo')=="")
+                <a class="btn-sm-square bg-white rounded-circle ms-3" href="/ingreso">
+                    <small class="fa fa-user text-body"></small>
+                </a>
+                @else
+                <a class="btn-sm-square bg-white rounded-circle ms-3" href="/cuenta">
+                    <small class="fa fa-user text-body"></small>
+                </a>
+                @endif
+
+                @if(session('correo')=="")
+                <a class="btn-sm-square bg-white rounded-circle ms-3" href="/ingreso">
+                    <small class="fa fa-shopping-bag text-body"></small>
+                </a>
+                @else
+                <a class="btn-sm-square bg-white rounded-circle ms-3" href="/carrito">
+                    <small class="fa fa-shopping-bag text-body"></small>
+                </a>
+                @endif
+
+                
+    
 </div>
 
 <style>

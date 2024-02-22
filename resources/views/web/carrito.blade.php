@@ -1,1 +1,2 @@
+
 @extends("web.plantilla")

@@ -11,6 +11,12 @@ class ControladorWebCuenta extends Controller
 {
     public function index()
     {
+        if (session('correo') ==! null){
             return view("web.cuenta");
+        }else{
+            $titulo = 'Acceso';
+            return view('web.ingreso',compact('titulo'));
+
+        }
     }
 }

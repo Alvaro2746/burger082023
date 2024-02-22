@@ -10,8 +10,7 @@ use Session;
 require app_path() . '/start/constants.php';
 require app_path() . '/start/funciones_generales.php';
 
-class ControladorWebIngreso extends Controller
-{
+class ControladorWebIngreso extends Controller{
     public function index(Request $request)
     {
         $titulo = 'Acceso';
