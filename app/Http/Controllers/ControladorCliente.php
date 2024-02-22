@@ -136,15 +136,11 @@ class ControladorCliente extends Controller
             } else {
                 $cliente= new Cliente();
                 $cliente->obtenerPorId($id);        
-                return view('sistema.cliente-nuevo', compact('titulo'));
+                return view('sistema.cliente-nuevo', compact('titulo', 'cliente'));
             }
         } else {
             return redirect('admin/login');
         }
-
-
-
-        return view('sistema.cliente-nuevo', compact('titulo', 'cliente'));
     }
             public function eliminar(Request $request)
         {

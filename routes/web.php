@@ -20,6 +20,11 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/takeaway', 'ControladorWebTakeaway@index');
     Route::get('/contacto', 'ControladorWebContacto@index');
     Route::get('/nosotros', 'ControladorWebNosotros@index');
+    Route::get('/cuenta', 'ControladorWebCuenta@index');
+    Route::get('/carrito', 'ControladorWebCarrito@index');
+    Route::get('/ingreso', 'ControladorWebIngreso@index');
+    Route::post('/ingreso', 'ControladorWebIngreso@entrar');
+
  
 
     Route::get('/admin', 'ControladorHome@index');
@@ -167,3 +172,6 @@ Route::get('/admin/pedido/cargarGrilla', 'ControladorPedido@cargarGrilla')->name
 Route::get('/admin/pedido/eliminar', 'ControladorPedido@eliminar');
 Route::get('/admin/pedido/{id}', 'ControladorPedido@editar');
 Route::post('/admin/pedido/{id}', 'ControladorPedido@guardar');
+/* --------------------------------------------- */
+/* CONTROLADOR INGRESO                          */
+/* --------------------------------------------- */

@@ -25,10 +25,14 @@ class Cliente extends Model
         $this->correo = $request->input('txtCorreo');
         $this->telefono = $request->input('txtTelefono');
         $this->dni = $request->input('txtDNI');
-        $this->clave = $request->input('txtclave') != ""? password_hash(input('txtclave'), PASSWORD_DEFAULT): "";
+        if($request->input('txtClave')!= ""){
+            $this->clave = password_hash($request->input('txtClave'), PASSWORD_DEFAULT);
+        }else{
+            $this->clave = $request->input('txtClave');
+        }
+        
     }
 
-    
 
     public function obtenerTodos()
     {
@@ -161,6 +165,22 @@ class Cliente extends Model
 
         return $lstRetorno;
     }
-
+    public function validarCorreo($correo) {
+        $sql = "SELECT DISTINCT 
+            A.idcliente,
+            A.nombre,
+            A.apellido,
+            A.telefono,
+            A.correo,
+            A.dni,
+            A.clave
+            FROM clientes A
+            WHERE A.correo = '$correo'"; 
+    $lstRetorno = DB::select($sql);
+    return $lstRetorno;
+}
+public function validarClave($claveIngresada, $claveBBDD){
+    return password_verify($claveIngresada, $claveBBDD);
+}
     
 }

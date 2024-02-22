@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
+use App\Entidades\Sistema\Producto;
 use Session;
 
-class ControladorWebHome extends Controller
+class ControladorWebCarrito extends Controller
 {
     public function index()
     {
-                // Ejemplo de establecer una variable de sesión
-            return view("web.index");
+            return view("web.carrito");
     }
 }
