@@ -1,4 +1,8 @@
-<?php session_start();?>
+<?php 
+// session_start();
+// echo session('correo');
+// exit;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -76,13 +80,41 @@
                     <a href="/contacto" class="nav-item nav-link">Contacto</a>
                 </div>
                 <div class="d-none d-lg-flex ms-2">
-                    <a class="btn-sm-square bg-white rounded-circle ms-3" href="/cuenta">
-                        <small class="fa fa-user text-body"></small>
-                    </a>
-                    <a class="btn-sm-square bg-white rounded-circle ms-3" href="/carrito">
-                        <small class="fa fa-shopping-bag text-body"></small>
-                    </a>
-                </div>
+                @if(session('correo')=="")
+                <a href="/ingreso"><div class="cuadrado">
+                <span class="texto">Iniciar Sesión</span>
+                </div></a>
+                @else
+                <a href="/ingreso/out"><div class="cuadrado">
+                <span class="texto">cerrar Sesion</span>
+                </div></a>
+                @endif
+
+    <a class="btn-sm-square bg-white rounded-circle ms-3" href="/cuenta">
+        <small class="fa fa-user text-body"></small>
+    </a>
+    <a class="btn-sm-square bg-white rounded-circle ms-3" href="/carrito">
+        <small class="fa fa-shopping-bag text-body"></small>
+    </a>
+</div>
+
+<style>
+    .cuadrado {
+        width: 100px;
+        height: 50px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .texto {
+        font-size: 12px;
+        color: #212529;
+        font-weight: bold;
+    }
+</style>
             </div>
         </nav>
     </div>

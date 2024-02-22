@@ -63,4 +63,15 @@ class ControladorWebIngreso extends Controller
             return view('web.ingreso', compact('titulo', 'msg'));
         }
     }
+    public function cerrar(){
+        $titulo = 'Acceso';
+
+        session()->put('cliente_id', "");
+        session()->put('correo', "");
+        session()->put('cliente_nombre', "");
+
+        return view('web.ingreso',compact('titulo'));
+
+}
+
 }
