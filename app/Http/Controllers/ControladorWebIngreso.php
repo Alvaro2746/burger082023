@@ -42,6 +42,8 @@ class ControladorWebIngreso extends Controller{
                 $titulo = 'Inicio';
                 $request->session()->put('cliente_id', $lstCliente[0]->idcliente);
                 $request->session()->put('correo', $lstCliente[0]->correo);
+                $request->session()->put('dni', $lstCliente[0]->dni);
+                $request->session()->put('telefono', $lstCliente[0]->telefono);
                 $request->session()->put('cliente_nombre', $lstCliente[0]->nombre . " " . $lstCliente[0]->apellido);
 
 

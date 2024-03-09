@@ -12,6 +12,9 @@ class ControladorWebCarrito extends Controller
     public function index()
     {
         if (session('correo') ==! null){
+
+            
+
             return view("web.carrito");
 
         }else{
